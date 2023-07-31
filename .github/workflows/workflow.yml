@@ -1,6 +1,7 @@
 on:
   workflow_call:
     inputs:
+      _ref: { type: string, default: tags/v1 }
       steps: { type: string, required: true }
 jobs:
   job:
@@ -11,7 +12,7 @@ jobs:
           set -e
           script_dir=$(mktemp -d)
           cd "$script_dir"
-          curl -fsSL https://github.com/runs-on/archlinux-latest/archive/refs/tags/v1.tar.gz \
+          curl -fsSL https://github.com/runs-on/archlinux-latest/archive/refs/${{ inputs._ref }}.tar.gz \
             | tar -xzv
           ls -lAh
         env:

@@ -22,5 +22,6 @@ jobs:
   test-action:
     runs-on: ./.github/workflows/workflow.yml # runs-on/archlinux-latest/.github/workflows/workflow.yml@vN
     with:
+      _ref: ${{ github.ref }}
       steps: |
         - run: cat /etc/os-release
