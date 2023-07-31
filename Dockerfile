@@ -1,10 +1,11 @@
-FROM --platform linux/amd64 archlinux:latest
+FROM --platform=linux/amd64 archlinux:latest
 
-RUN pacman -Sy \
-    github-cli \
-    clang \
-    jdk-openjdk \
-    nodejs \
+RUN pacman -Syy --noconfirm && \
+  pacman -S --noconfirm \
+  github-cli \
+  clang \
+  jdk-openjdk \
+  nodejs \
   && pacman -Sc
 
 RUN mkdir -p /runner/workspace

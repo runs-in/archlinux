@@ -1,0 +1,15 @@
+name: "runs-on: archlinux-*"
+description: 🥽 Runs a job or step in an Arch Linux Docker container
+inputs:
+  runs-on: { default: "${{ env.RUNS_ON }}" }
+  id: {}
+  name: {}
+  if: { default: true }
+  env: { default: "{}" }
+  timeout-minutes: { default: 71582 } # 2^32-1 / 60 / 1000
+  continue-on-error: { default: false }
+  shell: { default: "bash -e {0}" }
+  run: { required: true }
+runs:
+  using: node16
+  main: index-action.js

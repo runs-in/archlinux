@@ -1,0 +1,26 @@
+name: Test action
+on:
+  push:
+    branches: "main"
+    paths-ignore:
+      - .gitignore
+      - LICENSE
+      - README.md
+      - .github/**
+      - "!.github/workflows/test-action.yml"
+  pull_request:
+    paths-ignore:
+      - .gitignore
+      - LICENSE
+      - README.md
+      - .github/**
+      - "!.github/workflows/test-action.yml"
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  test-action:
+    runs-on: ./.github/workflows/workflow.yml # runs-on/archlinux-latest/.github/workflows/workflow.yml@vN
+    with:
+      steps: |
+        - run: cat /etc/os-release

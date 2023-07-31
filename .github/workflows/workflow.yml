@@ -1,0 +1,18 @@
+on:
+  workflow_call:
+    inputs:
+      steps: { type: string, required: true }
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ▶️ main
+        run: |
+          set -e
+          script_dir=$(mktemp -d)
+          cd "$script_dir"
+          curl -fsSL https://github.com/runs-on/archlinux-latest/archive/refs/tags/v1.tar.gz \
+            | tar -xzv
+          ls -lAh
+        env:
+          INPUT_STEPS: ${{ inputs.steps }}
